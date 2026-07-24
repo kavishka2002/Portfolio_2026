@@ -7,11 +7,10 @@ export const profile = {
   statement:
     "I transform real-world problems into practical software solutions using modern web technologies, mobile development, AI, and healthcare technology.",
   availability: "Open to opportunities",
-  linkedin: "https://www.linkedin.com/in/kavishka-sandaruwan-125382297/",
   linkedin: process.env.NEXT_PUBLIC_LINKEDIN || "https://www.linkedin.com/in/kavishka-sandaruwan-125382297/",
   github: process.env.NEXT_PUBLIC_GITHUB || undefined,
   email: process.env.NEXT_PUBLIC_EMAIL || undefined,
-  resumePath: "/Kavishka-Sandaruwan-Resume.pdf",
+  resumePath: "/cv.pdf",
 };
 
 export type ExperienceItem = {

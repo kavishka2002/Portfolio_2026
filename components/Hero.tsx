@@ -82,7 +82,10 @@ export default function Hero() {
               />
             </a>
             <a
-              href={profile.resumePath}
+              href="/cv.pdf"
+              download="Kavishka-Sandaruwan-CV.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 border border-border/25 px-5 py-2.5 font-mono text-[13px] text-ink transition-colors hover:border-amber hover:text-amber"
             >
               <FileDown size={14} />
