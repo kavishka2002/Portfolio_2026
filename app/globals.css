@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light — "workbench paper" */
+  --bg: 242 243 241;
+  --surface: 255 255 255;
+  --surface-2: 235 236 232;
+  --border: 27 29 33;
+  --ink: 18 20 24;
+  --ink-muted: 90 94 100;
+  --amber: 180 110 20;
+  --slate: 60 92 122;
+  --moss: 60 110 82;
+}
+
+.dark {
+  /* Dark — "engineering console" */
+  --bg: 13 14 17;
+  --surface: 19 21 25;
+  --surface-2: 24 26 31;
+  --border: 235 236 232;
+  --ink: 235 236 232;
+  --ink-muted: 148 152 158;
+  --amber: 232 163 61;
+  --slate: 122 165 199;
+  --moss: 122 199 158;
+}
+
+* {
+  border-color: rgb(var(--border) / 0.12);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(var(--bg));
+  color: rgb(var(--ink));
+  font-feature-settings: "ss01", "cv01";
+}
+
+::selection {
+  background: rgb(var(--amber) / 0.25);
+  color: rgb(var(--ink));
+}
+
+/* thin, engineering-style scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border) / 0.3);
+  border-radius: 4px;
+}
+
+.bg-blueprint {
+  background-image:
+    linear-gradient(rgb(var(--border) / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--border) / 0.08) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus visibility */
+a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
+  outline: 2px solid rgb(var(--amber));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
