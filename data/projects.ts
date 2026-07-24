@@ -59,7 +59,7 @@ export const projects: Project[] = [
       "Mileage tracking and vehicle analytics",
       "Multiple vehicle management",
       "Offline-first experience with automatic synchronization",
-      "Emergency GSM-based SMS safety alerts",
+      
     ],
     architecture: [
       "Flutter (Dart) client with SQFlite as the local source of truth",
