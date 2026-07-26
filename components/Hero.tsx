@@ -123,9 +123,6 @@ export default function Hero() {
               />
             </div>
           </motion.div>
-          <p className="mt-6 text-center font-mono text-[11px] text-ink-muted">
-            /public/images/profile.jpg
-          </p>
         </motion.div>
       </div>
     </section>
