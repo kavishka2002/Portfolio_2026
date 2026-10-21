@@ -17,14 +17,14 @@ export default function Section({
   children: ReactNode;
 }) {
   return (
-    <section id={id} className="scroll-mt-20 border-b border-border/10 px-5 py-20 sm:px-10 lg:px-14 lg:py-28">
+    <section id={id} className="scroll-mt-20 border-b border-border/10 px-5 py-20 sm:px-10 sm:py-24 lg:px-14 lg:py-28">
       <div className="mx-auto max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="mb-10 lg:mb-14"
+          className="mb-9 lg:mb-12"
         >
           <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.2em] text-amber">
             {eyebrow}

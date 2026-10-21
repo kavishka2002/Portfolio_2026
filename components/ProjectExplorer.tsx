@@ -1,139 +1,135 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "framer-motion";
-import { ArrowUpRight, Github } from "lucide-react";
+import { motion } from "framer-motion";
+import { ArrowUpRight, Github, Globe2 } from "lucide-react";
 import Section from "./Section";
 import ImageFrame from "./ImageFrame";
 import { projects } from "@/data/projects";
 
-export default function ProjectExplorer() {
-  const [activeSlug, setActiveSlug] = useState(projects[0].slug);
-  const active = projects.find((p) => p.slug === activeSlug)!;
+const featuredSlugs = ["shiftcare", "smart-clinic", "n-gems", "technical-issues-management"];
+const orderedProjects = [...projects].sort((a, b) => {
+  const aIndex = featuredSlugs.indexOf(a.slug);
+  const bIndex = featuredSlugs.indexOf(b.slug);
+  const aRank = aIndex === -1 ? featuredSlugs.length : aIndex;
+  const bRank = bIndex === -1 ? featuredSlugs.length : bIndex;
+  return aRank - bRank;
+});
 
+export default function ProjectExplorer() {
   return (
     <Section
       id="projects"
-      eyebrow="02 · Projects"
-      title="Project Experience"
-      description="Four systems, four different problems. Select one to open its case study."
+      eyebrow="02 · Selected work"
+      title="Projects built around real needs."
+      description="Web, mobile, business, and healthcare systems—each one a chance to explore a problem and build a practical response."
     >
-      <div className="grid gap-0 border border-border/15 lg:grid-cols-[280px_1fr]">
-        {/* Left nav list */}
-        <div className="border-b border-border/15 lg:border-b-0 lg:border-r">
-          {projects.map((p) => (
-            <button
-              key={p.slug}
-              onClick={() => setActiveSlug(p.slug)}
-              className={`flex w-full items-center gap-3 border-b border-border/10 px-5 py-4 text-left transition-colors last:border-b-0 ${
-                p.slug === activeSlug
-                  ? "bg-surface-2"
-                  : "bg-surface hover:bg-surface-2/60"
-              }`}
+      <div className="mb-7 flex items-center justify-between gap-4 border-b border-border/15 pb-4">
+        <p className="font-mono text-[11px] uppercase tracking-[0.15em] text-ink-muted">
+          Portfolio projects
+        </p>
+        <p className="font-mono text-[11px] text-ink-muted">
+          {String(projects.length).padStart(2, "0")} case studies
+        </p>
+      </div>
+
+      <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        {orderedProjects.map((project, index) => {
+          const sourceUrl =
+            project.githubUrl ??
+            project.githubUrlFrontend ??
+            project.githubUrlBackend;
+
+          return (
+            <motion.article
+              key={project.slug}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.45, delay: (index % 3) * 0.06 }}
+              className="project-card surface-card group overflow-hidden rounded-2xl"
             >
-              <span
-                className={`font-mono text-xs ${
-                  p.slug === activeSlug ? "text-amber" : "text-ink-muted"
-                }`}
+              <Link
+                href={`/projects/${project.slug}`}
+                className="project-image block overflow-hidden border-b border-border/15"
+                aria-label={`View ${project.name} case study`}
               >
-                {p.index}
-              </span>
-              <div className="min-w-0">
-                <p className="truncate font-mono text-[13px] text-ink">{p.name}</p>
-                <p className="truncate text-[11px] text-ink-muted">{p.category}</p>
-              </div>
-            </button>
-          ))}
-        </div>
+                <ImageFrame
+                  src={project.coverPath}
+                  alt={`${project.name} project preview`}
+                  label={project.status}
+                  className="aspect-[16/10] w-full border-0"
+                />
+              </Link>
 
-        {/* Right preview */}
-        <div className="relative overflow-hidden bg-surface p-6 sm:p-8">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active.slug}
-              initial={{ opacity: 0, x: 16 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -16 }}
-              transition={{ duration: 0.3 }}
-            >
-              <ImageFrame
-                src={active.coverPath}
-                alt={`${active.name} cover screenshot`}
-                className="mb-6 h-52 w-full sm:h-64"
-              />
-
-              <div className="mb-3 flex flex-wrap items-center gap-2">
-                {active.badge && (
-                  <span className="border border-amber/40 px-2 py-0.5 font-mono text-[10px] text-amber">
-                    {active.badge}
+              <div className="p-5 sm:p-6">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="rounded-full border border-amber/25 bg-amber/5 px-2.5 py-1 font-mono text-[9px] uppercase tracking-wider text-amber">
+                    {project.category}
                   </span>
+                  <span className="font-mono text-[10px] text-ink-muted">{project.year}</span>
+                </div>
+
+                <h3 className="mt-4 font-display text-xl font-semibold leading-snug text-ink">
+                  {project.name}
+                </h3>
+                <p className="mt-2 min-h-[3rem] text-sm leading-6 text-ink-muted">
+                  {project.tagline}
+                </p>
+                <p className="mt-3 line-clamp-2 text-xs leading-5 text-ink-muted/90">
+                  {project.overview}
+                </p>
+
+                {project.stack.length > 0 && (
+                  <ul className="mt-4 flex flex-wrap gap-1.5" aria-label="Technologies">
+                    {project.stack.slice(0, 4).map((technology) => (
+                      <li
+                        key={technology}
+                        className="rounded-md bg-surface-2 px-2 py-1 font-mono text-[9px] text-ink-muted"
+                      >
+                        {technology}
+                      </li>
+                    ))}
+                    {project.stack.length > 4 && (
+                      <li className="px-1 py-1 font-mono text-[9px] text-ink-muted">
+                        +{project.stack.length - 4}
+                      </li>
+                    )}
+                  </ul>
                 )}
-                <span className="font-mono text-[11px] text-ink-muted">
-                  {active.year} · {active.category}
-                </span>
-              </div>
 
-              <h3 className="font-display text-2xl text-ink">{active.name}</h3>
-              <p className="mt-1 font-mono text-[13px] text-slate">{active.tagline}</p>
-              <p className="mt-4 max-w-2xl text-[14px] leading-relaxed text-ink-muted">
-                {active.overview}
-              </p>
-
-              <div className="mt-5 flex flex-wrap gap-1.5">
-                {active.stack.map((s) => (
-                  <span
-                    key={s}
-                    className="border border-border/20 px-2 py-1 font-mono text-[11px] text-ink-muted"
+                <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-border/15 pt-4">
+                  <Link
+                    href={`/projects/${project.slug}`}
+                    className="inline-flex items-center gap-1.5 font-mono text-[11px] font-medium text-ink transition-colors hover:text-amber"
                   >
-                    {s}
-                  </span>
-                ))}
+                    Case study <ArrowUpRight size={13} />
+                  </Link>
+                  {project.liveUrl && (
+                    <a
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-muted transition-colors hover:text-amber"
+                    >
+                      <Globe2 size={13} /> Live site
+                    </a>
+                  )}
+                  {sourceUrl && (
+                    <a
+                      href={sourceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 font-mono text-[11px] text-ink-muted transition-colors hover:text-amber"
+                    >
+                      <Github size={13} /> Source
+                    </a>
+                  )}
+                </div>
               </div>
-
-              <ul className="mt-6 grid gap-1.5 sm:grid-cols-2">
-                {active.features.slice(0, 6).map((f) => (
-                  <li key={f} className="flex gap-2 text-[13px] text-ink-muted">
-                    <span className="mt-1 h-1 w-1 shrink-0 rounded-full bg-amber" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-7 flex flex-wrap gap-3">
-                <Link
-                  href={`/projects/${active.slug}`}
-                  className="inline-flex items-center gap-1.5 bg-ink px-4 py-2 font-mono text-[12px] text-bg dark:bg-amber dark:text-bg"
-                >
-                  View Case Study
-                  <ArrowUpRight size={13} />
-                </Link>
-                {active.liveUrl && (
-                  <a
-                    href={active.liveUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 border border-border/25 px-4 py-2 font-mono text-[12px] text-ink hover:border-amber hover:text-amber"
-                  >
-                    Live Demo
-                    <ArrowUpRight size={13} />
-                  </a>
-                )}
-                {active.githubUrl && (
-                  <a
-                    href={active.githubUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 border border-border/25 px-4 py-2 font-mono text-[12px] text-ink hover:border-amber hover:text-amber"
-                  >
-                    <Github size={13} />
-                    GitHub
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+            </motion.article>
+          );
+        })}
       </div>
     </Section>
   );

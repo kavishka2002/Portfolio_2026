@@ -8,51 +8,51 @@ export type SkillCategory = {
 export const skillCategories: SkillCategory[] = [
   {
     id: "frontend",
-    label: "Frontend",
-    description: "Interfaces people actually use.",
-    items: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    label: "Frontend Development",
+    description: "Frontend development and user interface design.",
+    items: ["React.js", "Next.js", "HTML", "CSS", "JavaScript", "UI/UX Design Principles"],
   },
   {
     id: "backend",
-    label: "Backend",
-    description: "APIs and application logic.",
-    items: ["Node.js", "Express.js", "REST APIs", "Firebase Functions"],
+    label: "Backend Development",
+    description: "Server-side application development and APIs.",
+    items: ["Node.js", "Express.js", "RESTful API Development", "Python Programming Fundamentals"],
+  },
+  {
+    id: "programming",
+    label: "Languages & Programming",
+    description: "Languages used in web, mobile, and machine-learning projects.",
+    items: ["JavaScript", "TypeScript", "Python", "Dart"],
   },
   {
     id: "mobile",
-    label: "Mobile",
-    description: "Offline-first native experiences.",
-    items: ["Flutter", "Dart", "SQFlite", "Native MethodChannels"],
+    label: "Mobile Application Development",
+    description: "Mobile development for Android and Flutter.",
+    items: ["Android", "Flutter"],
   },
   {
     id: "database",
-    label: "Database",
-    description: "Where the data actually lives.",
-    items: ["MongoDB", "PostgreSQL", "Firebase Firestore"],
-  },
-  {
-    id: "cloud",
-    label: "Cloud & Hosting",
-    description: "Shipping and keeping things running.",
-    items: ["Vercel", "Supabase", "Firebase"],
+    label: "Database Management",
+    description: "Relational and document database systems.",
+    items: ["MongoDB", "PostgreSQL"],
   },
   {
     id: "ai",
-    label: "AI Integration",
-    description: "Language models inside real products.",
-    items: ["Google Gemini API"],
+    label: "AI & Machine Learning",
+    description: "Tools used in the in-progress medical AI project.",
+    items: ["PyTorch", "Hugging Face Transformers", "Scikit-learn"],
   },
   {
-    id: "maps",
-    label: "Maps & Location",
-    description: "Getting people where they're going.",
-    items: ["Google Maps API", "GPS", "PDR"],
+    id: "cloud",
+    label: "Health Information Technology",
+    description: "Digital health systems and healthcare information workflows.",
+    items: ["Health Information Technology", "Healthcare Data Analytics", "Medical Informatics"],
   },
   {
     id: "tools",
-    label: "Tools & Platforms",
-    description: "The rest of the toolbox.",
-    items: ["Git & GitHub", "Google OAuth", "Nodemailer"],
+    label: "Tools & Fundamentals",
+    description: "Development tools and computing fundamentals.",
+    items: ["Git", "GitHub", "Version Control", "Operating Systems Fundamentals"],
   },
 ];
 
@@ -63,12 +63,12 @@ export type FocusArea = {
 
 // Qualitative focus areas — not fabricated proficiency percentages.
 export const focusAreas: FocusArea[] = [
-  { area: "Full-Stack Development", detail: "React / Next.js + Node.js" },
-  { area: "Mobile Development", detail: "Flutter, offline-first architecture" },
-  { area: "Healthcare Technology", detail: "Clinic & patient workflow systems" },
-  { area: "AI Integration", detail: "Gemini-powered assistants" },
-  { area: "Database Systems", detail: "MongoDB, PostgreSQL, Firestore" },
-  { area: "Cloud Platforms", detail: "Supabase, Firebase, Vercel" },
+  { area: "Full-Stack Development", detail: "MERN stack and Next.js" },
+  { area: "Mobile Development", detail: "Android and Flutter" },
+  { area: "Healthcare Technology", detail: "Health information systems" },
+  { area: "Medical Informatics", detail: "Healthcare data and information" },
+  { area: "Artificial Intelligence", detail: "AI applications in healthcare" },
+  { area: "Digital Health", detail: "Privacy-aware clinical systems" },
 ];
 
 export const whatIBuild = [
@@ -82,7 +82,7 @@ export const whatIBuild = [
     index: "02",
     title: "Mobile Applications",
     description:
-      "Flutter apps built offline-first, syncing cleanly once connectivity returns.",
+      "Mobile applications for Android and Flutter.",
   },
   {
     index: "03",
@@ -92,9 +92,9 @@ export const whatIBuild = [
   },
   {
     index: "04",
-    title: "AI-Powered Applications",
+    title: "Medical AI & Healthcare Data",
     description:
-      "Practical AI features — assistants and insights — grounded in real user tasks.",
+      "Exploring machine-learning workflows and AI applications in healthcare.",
   },
   {
     index: "05",

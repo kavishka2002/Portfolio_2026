@@ -17,7 +17,7 @@ export default function Gallery() {
   return (
     <Section
       id="gallery"
-      eyebrow="08 · Moments & Beyond Code"
+      eyebrow="10 · Moments & Beyond Code"
       title="Gallery"
       description="Projects, events, and community moments outside the codebase."
     >

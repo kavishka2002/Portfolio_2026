@@ -8,6 +8,8 @@ import {
   Award,
   Users,
   Images,
+  BookOpen,
+  Trophy,
   Mail,
 } from "lucide-react";
 
@@ -16,10 +18,12 @@ export const navItems = [
   { id: "about", label: "About", icon: User },
   { id: "projects", label: "Projects", icon: FolderGit2 },
   { id: "skills", label: "Skills", icon: Cpu },
+  { id: "research", label: "Research Interests", icon: BookOpen },
   { id: "experience", label: "Experience", icon: Briefcase },
   { id: "education", label: "Education", icon: GraduationCap },
   { id: "certifications", label: "Certifications", icon: Award },
   { id: "leadership", label: "Leadership", icon: Users },
+  { id: "achievements", label: "Achievements", icon: Trophy },
   { id: "gallery", label: "Gallery", icon: Images },
   { id: "contact", label: "Contact", icon: Mail },
 ] as const;

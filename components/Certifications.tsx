@@ -8,7 +8,7 @@ import { certifications } from "@/data/profile";
 
 export default function Certifications() {
   return (
-    <Section id="certifications" eyebrow="06 · Certifications" title="Certifications">
+    <Section id="certifications" eyebrow="07 · Certifications" title="Certifications">
       <div className="grid gap-4 sm:grid-cols-2">
         {certifications.map((cert, i) => (
           <motion.div

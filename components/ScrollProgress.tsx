@@ -11,7 +11,7 @@ export default function ScrollProgress() {
   });
 
   return (
-    <div className="fixed left-[272px] top-0 z-40 hidden h-screen w-px bg-border/10 lg:block">
+    <div className="fixed left-[252px] top-0 z-40 hidden h-screen w-px bg-border/10 lg:block">
       <motion.div
         style={{ scaleY, transformOrigin: "top" }}
         className="h-full w-px bg-amber"

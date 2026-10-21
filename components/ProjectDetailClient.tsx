@@ -9,6 +9,12 @@ import type { Project } from "@/data/projects";
 export default function ProjectDetailClient({ project }: { project: Project }) {
   const [activeImg, setActiveImg] = useState(0);
   const [lightbox, setLightbox] = useState(false);
+  const hasImages = project.gallery.some(Boolean);
+  const repositoryLinks = [
+    { label: "GitHub Repository", href: project.githubUrl },
+    { label: "Frontend Source", href: project.githubUrlFrontend },
+    { label: "Backend Source", href: project.githubUrlBackend },
+  ].filter((link) => link.href);
 
   const next = () => setActiveImg((i) => (i + 1) % project.gallery.length);
   const prev = () =>
@@ -35,23 +41,31 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       <p className="mt-2 font-mono text-sm text-slate">{project.tagline}</p>
 
       {/* Main gallery image */}
-      <button
-        onClick={() => setLightbox(true)}
-        className="mt-8 block w-full cursor-zoom-in"
-      >
+      {hasImages ? (
+        <button
+          onClick={() => setLightbox(true)}
+          className="mt-8 block w-full cursor-zoom-in"
+        >
+          <ImageFrame
+            src={project.gallery[activeImg]}
+            alt={`${project.name} screenshot ${activeImg + 1}`}
+            className="h-64 w-full sm:h-96"
+          />
+        </button>
+      ) : (
         <ImageFrame
-          src={project.gallery[activeImg]}
-          alt={`${project.name} screenshot ${activeImg + 1}`}
+          src={null}
+          alt={`${project.name} project photo coming soon`}
           className="h-64 w-full sm:h-96"
         />
-      </button>
+      )}
 
       {/* Thumbnails */}
-      {project.gallery.length > 1 && (
+      {project.gallery.length > 1 && hasImages && (
         <div className="mt-3 flex gap-2 overflow-x-auto">
           {project.gallery.map((src, i) => (
             <button
-              key={src}
+              key={`${project.slug}-image-${i}`}
               onClick={() => setActiveImg(i)}
               className={`shrink-0 ${i === activeImg ? "opacity-100" : "opacity-50"}`}
             >
@@ -99,7 +113,7 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       </div>
 
       {/* Architecture */}
-      {project.architecture && (
+      {project.architecture && project.architecture.length > 0 && (
         <div className="mt-10">
           <h2 className="font-mono text-[11px] uppercase tracking-widest text-amber">
             Architecture Overview
@@ -115,19 +129,21 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
       )}
 
       {/* Tech stack */}
-      <div className="mt-10">
-        <h2 className="font-mono text-[11px] uppercase tracking-widest text-amber">Technology Stack</h2>
-        <div className="mt-3 flex flex-wrap gap-1.5">
-          {project.stack.map((s) => (
-            <span
-              key={s}
-              className="border border-border/20 px-2.5 py-1 font-mono text-[11px] text-ink-muted"
-            >
-              {s}
-            </span>
-          ))}
+      {project.stack.length > 0 && (
+        <div className="mt-10">
+          <h2 className="font-mono text-[11px] uppercase tracking-widest text-amber">Technology Stack</h2>
+          <div className="mt-3 flex flex-wrap gap-1.5">
+            {project.stack.map((s) => (
+              <span
+                key={s}
+                className="border border-border/20 px-2.5 py-1 font-mono text-[11px] text-ink-muted"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Links */}
       <div className="mt-10 flex flex-wrap gap-3">
@@ -141,21 +157,22 @@ export default function ProjectDetailClient({ project }: { project: Project }) {
             Live Demo <ArrowUpRight size={13} />
           </a>
         )}
-        {project.githubUrl && (
+        {repositoryLinks.map(({ label, href }) => (
           <a
-            href={project.githubUrl}
+            key={label}
+            href={href}
             target="_blank"
             rel="noreferrer"
             className="inline-flex items-center gap-1.5 border border-border/25 px-4 py-2 font-mono text-[12px] text-ink hover:border-amber hover:text-amber"
           >
-            <Github size={13} /> GitHub Repository
+            <Github size={13} /> {label}
           </a>
-        )}
+        ))}
       </div>
 
       {/* Lightbox */}
       <AnimatePresence>
-        {lightbox && (
+        {lightbox && hasImages && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

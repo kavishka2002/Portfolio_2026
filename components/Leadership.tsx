@@ -8,7 +8,7 @@ export default function Leadership() {
   return (
     <Section
       id="leadership"
-      eyebrow="07 · Beyond Code"
+      eyebrow="08 · Beyond Code"
       title="Leadership & Community"
     >
       <div className="grid gap-5 sm:grid-cols-2">

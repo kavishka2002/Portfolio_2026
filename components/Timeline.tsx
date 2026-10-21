@@ -6,7 +6,7 @@ import { experience, education, certificationTraining } from "@/data/profile";
 
 export function ExperienceSection() {
   return (
-    <Section id="experience" eyebrow="04 · Experience" title="Professional Experience">
+    <Section id="experience" eyebrow="05 · Experience" title="Professional Experience">
       <ol className="relative ml-2 space-y-10 border-l border-border/20 pl-8">
         {experience.map((item, i) => (
           <motion.li
@@ -22,6 +22,7 @@ export function ExperienceSection() {
             <h3 className="mt-1 font-display text-lg text-ink">{item.org}</h3>
             <p className="text-[13px] text-slate">{item.role}</p>
             <p className="mt-1 text-[13px] text-ink-muted">{item.location}</p>
+            {item.note && <p className="mt-3 max-w-2xl text-[13px] leading-relaxed text-ink-muted">{item.note}</p>}
           </motion.li>
         ))}
       </ol>
@@ -31,7 +32,7 @@ export function ExperienceSection() {
 
 export function EducationSection() {
   return (
-    <Section id="education" eyebrow="05 · Education" title="Education">
+    <Section id="education" eyebrow="06 · Education" title="Education">
       <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
         <ol className="relative ml-2 space-y-10 border-l border-border/20 pl-8">
           {education.map((item, i) => (

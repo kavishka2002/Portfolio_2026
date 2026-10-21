@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const project = getProjectBySlug(slug);
   if (!project) return {};
   return {
-    title: `${project.name} | Kavishka Sandaruwan`,
+    title: project.name,
     description: project.overview,
   };
 }
@@ -24,7 +24,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
   if (!project) notFound();
 
   return (
-    <main className="min-h-screen bg-bg px-5 py-16 sm:px-10 lg:px-14">
+    <main id="main" className="min-h-screen bg-bg px-5 py-16 sm:px-10 lg:px-14">
       <div className="mx-auto max-w-4xl">
         <Link
           href="/#projects"

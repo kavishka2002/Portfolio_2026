@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
+import { MotionConfig } from "framer-motion";
 import "./globals.css";
 import { ThemeProvider } from "@/lib/theme-provider";
 import Sidebar from "@/components/Sidebar";
 import MobileNav from "@/components/MobileNav";
 import ScrollProgress from "@/components/ScrollProgress";
+import { profile } from "@/data/profile";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -24,22 +26,23 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Kavishka Sandaruwan | Full-Stack & Mobile Application Developer",
+  metadataBase: new URL(profile.siteUrl),
+  title: {
+    default: "Kavishka Sandaruwan | Software & Health Technology",
+    template: "%s | Kavishka Sandaruwan",
+  },
   description:
-    "Portfolio of Kavishka Sandaruwan, an undergraduate Full-Stack and Mobile Application Developer passionate about software development, AI, healthcare technology, and innovative digital solutions.",
-  icons: { icon: "/favicon.ico" },
+    "Portfolio of Kavishka Sandaruwan, a Health Information and Communication Technology undergraduate building software, mobile, and digital health projects.",
   openGraph: {
-    title: "Kavishka Sandaruwan | Full-Stack & Mobile Application Developer",
-    description:
-      "Portfolio of Kavishka Sandaruwan — software development, AI, healthcare technology, and innovative digital solutions.",
+    title: "Kavishka Sandaruwan | Software & Health Technology",
+    description: "Software development, digital health projects, and healthcare technology interests.",
     type: "website",
     images: ["/images/profile.jpg"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kavishka Sandaruwan | Full-Stack & Mobile Application Developer",
-    description:
-      "Portfolio of Kavishka Sandaruwan — software development, AI, healthcare technology, and innovative digital solutions.",
+    title: "Kavishka Sandaruwan | Software & Health Technology",
+    description: "Software development, digital health projects, and healthcare technology interests.",
     images: ["/images/profile.jpg"],
   },
 };
@@ -54,13 +57,21 @@ export default function RootLayout({
       <body
         className={`${display.variable} ${body.variable} ${mono.variable} font-body`}
       >
+        <a
+          href="#main"
+          className="sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:not-sr-only focus:rounded-lg focus:bg-amber focus:px-4 focus:py-3 focus:font-mono focus:text-xs focus:text-bg"
+        >
+          Skip to content
+        </a>
         <ThemeProvider>
-          <ScrollProgress />
-          <Sidebar />
-          <MobileNav />
-          <div className="pb-20 pt-14 lg:ml-[272px] lg:pb-0 lg:pt-0">
-            {children}
-          </div>
+          <MotionConfig reducedMotion="user">
+            <ScrollProgress />
+            <Sidebar />
+            <MobileNav />
+            <div className="pb-20 pt-14 lg:ml-[252px] lg:pb-0 lg:pt-0">
+              {children}
+            </div>
+          </MotionConfig>
         </ThemeProvider>
       </body>
     </html>

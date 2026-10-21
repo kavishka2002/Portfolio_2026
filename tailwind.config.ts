@@ -19,6 +19,7 @@ const config: Config = {
         amber: "rgb(var(--amber) / <alpha-value>)",
         slate: "rgb(var(--slate) / <alpha-value>)",
         moss: "rgb(var(--moss) / <alpha-value>)",
+        violet: "rgb(var(--violet) / <alpha-value>)",
       },
       fontFamily: {
         display: ["var(--font-display)", "sans-serif"],
